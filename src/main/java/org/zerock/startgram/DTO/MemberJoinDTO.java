@@ -1,10 +1,13 @@
 package org.zerock.startgram.DTO;
 
+import lombok.Data;
+
+@Data
 public class MemberJoinDTO {
-//123243233213
 
-    // 가나다라마ㅏㅂ장asdasdasdasdasd
-
-
-    //두번째 테스트 ㅇㅈㅂㅇ12
+    private String mid;
+    private String mpw;
+    private String email;
+    private String del;
+    private String social;
 }
