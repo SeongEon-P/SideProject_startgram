@@ -19,10 +19,11 @@ public class Member extends BaseEntity {
     @Id
     private String mid;
     private String mpw;
-    private String mname;
+    private String name;
     private String email;
     private String address;
 
+    private boolean social;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
@@ -39,6 +40,9 @@ public class Member extends BaseEntity {
     }
     public void clearRoles(){
         this.roleSet.clear();
+    }
+    public void changeSocial(boolean social) {
+        this.social = social;
     }
 
 }

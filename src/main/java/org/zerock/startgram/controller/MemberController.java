@@ -16,16 +16,9 @@ import java.security.Principal;
 @Log4j2
 @RequiredArgsConstructor
 public class MemberController {
+
     private final MemberService memberService;
 
-    @GetMapping("/login")
-    public void loginGET(String error, String logout){
-        log.info("login get...............");
-        log.info("logout: "+logout);
-        if(logout != null){
-            log.info("user logout...........");
-        }
-    }
 
     @GetMapping("/join")
     public void joinGET(){
@@ -45,24 +38,7 @@ public class MemberController {
             return "redirect:/member/join";
         }
         redirectAttributes.addFlashAttribute("result","success");
-        return "redirect:/board/list";
-    }
-    @GetMapping("/modify")
-    //Principal : 로그인 정보가 모두 담겨있는 객체 (아이디, 권한)
-    public void modifyGET(Principal principal, Model model){
-        log.info("modify get...............");
-        model.addAttribute("member",memberService.getMember(principal.getName()));
-    }
-    @PostMapping("/modify")
-    public String modifyPOST(MemberJoinDTO joinDTO){
-        log.info("modify POST...............");
-        memberService.modify(joinDTO);
-        return "redirect:/board/list";
-    }
-    @PostMapping("/remove")
-    public String removePOST(String mid){
-        memberService.remove(mid);
-        // 계정 삭제 후 로그아웃, 로그아웃 하지않으면 삭제된 계정이 로그인 상태로 남게됨
-        return "redirect:/logout";
+        return "redirect:/board/join";
+//        return "redirect:/board/list";
     }
 }

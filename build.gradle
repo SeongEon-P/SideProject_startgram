@@ -43,6 +43,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security:3.2.5'
     // 스프링 인증
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.2.5'
+
 }
 
 tasks.named('test') {

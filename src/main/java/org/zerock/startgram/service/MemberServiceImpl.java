@@ -20,18 +20,6 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public boolean existMember(String mid) {
-        // existsById() : 기본키(Primary key)를 이용하여 존재여부를 확인 메서드
-        return memberRepository.existsById(mid);
-    }
-
-    @Override
-    public MemberJoinDTO getMember(String mid) {
-        Optional<Member> result = memberRepository.findById(mid);
-        MemberJoinDTO joinDTO = modelMapper.map(result, MemberJoinDTO.class);
-        return joinDTO;
-    }
 
     @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException {
@@ -55,25 +43,4 @@ public class MemberServiceImpl implements MemberService {
         //데이터베이스에 저장
         memberRepository.save(member);
     }
-
-    @Override
-    public void modify(MemberJoinDTO memberDTO) {
-        // 패스워드 암호화
-        String mpw = passwordEncoder.encode(memberDTO.getMpw());
-        //dto에 암호화된 비밀번호 설정
-        memberDTO.setMpw(mpw);
-        //dto를 entity로 변환
-        Member member = modelMapper.map(memberDTO, Member.class);
-        //데이터베이스에 저장
-        memberRepository.save(member);
-    }
-
-    @Override
-    public void remove(String mid) {
-        memberRepository.deleteById(mid);
-    }
-    //  @Override
-//  public void modify(String mpw, String mid) {
-//    memberRepository.updatePassword(passwordEncoder.encode(mpw),mid);
-//  }
 }
